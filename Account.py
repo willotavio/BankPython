@@ -3,11 +3,7 @@ class Account:
 
     logger = Log()
 
-    MAX_LENGHT = 12
-    accountAgency = ""
-    accountId = 0
-    accountName = ""
-    accountBalance = 0
+    MAX_LENGTH = 12
 
     def __init__(self, accountAgency, accountId, accountName, accountBalance):
         self.accountAgency = accountAgency
@@ -22,8 +18,8 @@ class Account:
               "\nBalance: " + str(accountBalance))
 
     def setName(self, accountName):
-        if len(accountName) > self.MAX_LENGHT:
-            self.accountName = accountName[0:self.MAX_LENGHT]
+        if len(accountName) > self.MAX_LENGTH:
+            self.accountName = accountName[0:self.MAX_LENGTH]
         else:
             self.accountName = accountName
         self.logger.out(self.accountName)
@@ -33,7 +29,7 @@ class Account:
         self.logger.out("DEPOSIT - R$" + str(value) + " Current balance: R$" + str(self.accountBalance))
 
     def withDraw(self, value):
-        if(value > self.accountBalance):
+        if value > self.accountBalance:
             self.logger.out("WITHDRAW - R$" + str(value) + " Current balance: R$" + str(self.accountBalance))
             return False
         else:
@@ -43,5 +39,3 @@ class Account:
 
     def getBalance(self):
         self.logger.out("BALANCE R$" + str(self.accountBalance))
-
-
