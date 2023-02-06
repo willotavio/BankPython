@@ -23,14 +23,19 @@ class Main:
                 self.operateAccount(account)
             elif op == "A":
                 self.logger.out(nubank.getAccounts())
-                selectedId = input("Enter account ID: ")
-                cc = nubank.accessAccount(selectedId)
+                selectedName = input("Enter account name: ")
+                cc = nubank.accessAccount(selectedName)
                 if not cc:
-                    self.logger.out("There's no account with this ID")
+                    self.logger.out("There's no account with this name")
                 else:
                     self.operateAccount(cc)
             elif op == "E":
                 break
+            elif op == "SEGREDO GIGATONICO":
+                if getattr(nubank.accounts[0], "accountName") == "zeppeli":
+                    print("jooj")
+                else:
+                    print("aksnd")
             else:
                 self.logger.out("Invalid option!\n"
                                 "Try again")

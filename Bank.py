@@ -28,9 +28,11 @@ class Bank:
                 accountList.append(str(i.accountAgency) + "/" + str(i.accountId) + "/" + str(i.accountName) + "/" + str(i.accountBalance))
             return accountList
 
-    def accessAccount(self, selectedId):
+    def accessAccount(self, selectedName):
         try:
-            cc = self.accounts[int(selectedId) - 1]
-            return cc
+            for i in range(len(self.accounts)):
+                if getattr(self.accounts[int(i)], "accountName") == selectedName:
+                    cc = self.accounts[int(i)]
+                    return cc
         except:
             self.logger.out("ERROR")
