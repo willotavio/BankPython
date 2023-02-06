@@ -7,10 +7,13 @@ class Main:
         nubank = Bank(1)
         while True:
             print("MENU"
-                  "\nC.Create account"
+                  "\nL.List Accounts"
+                  "\nC.Create Account"
                   "\nE.Exit")
             op = str(input().upper())
-            if op == "C":
+            if op == "L":
+                self.logger.out(nubank.getAccounts())
+            elif op == "C":
                 accountName = str(input("Enter your account name: "))
                 account = nubank.generateAccount(accountName)
                 self.operateAccount(account)
@@ -21,16 +24,16 @@ class Main:
         print("Welcome " + account.accountName)
         while True:
             print("BANK"
-                  "\n1.Deposit"
-                  "\n2.Withdraw"
-                  "\n3.View Balance"
-                  "\n4.Break")
-            choice = int(input())
-            if choice == 1:
+                  "\nD.Deposit"
+                  "\nW.Withdraw"
+                  "\nB.View Balance"
+                  "\nE.Exit")
+            choice = str(input().upper())
+            if choice == "D":
                 print("DEPOSIT"
                       "\nEnter the value you want to deposit in your account:")
                 account.deposit(float(input()))
-            elif choice == 2:
+            elif choice == "W":
                 print("WITHDRAW"
                       "\nEnter the value you want to withdraw from your account:")
                 if not account.withDraw(float(input())):
@@ -40,9 +43,9 @@ class Main:
                     self.logger.out("Withdraw successful"
                                "\nCurrent balance: R$" + str(account.accountBalance))
 
-            elif choice == 3:
+            elif choice == "B":
                 account.getBalance()
-            elif choice == 4:
+            elif choice == "E":
                 break
 
 main = Main()
