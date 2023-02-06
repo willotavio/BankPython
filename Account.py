@@ -35,13 +35,11 @@ class Account:
     def withDraw(self, value):
         if(value > self.accountBalance):
             self.logger.out("WITHDRAW - R$" + str(value) + " Current balance: R$" + str(self.accountBalance))
-            accepted = False
-            return accepted
+            return False
         else:
             self.accountBalance = self.accountBalance - value
             self.logger.out("WITHDRAW - R$" + str(value) + " Current balance: R$" + str(self.accountBalance))
-            accepted = True
-            return accepted
+            return True
 
     def getBalance(self):
         self.logger.out("BALANCE R$" + str(self.accountBalance))
