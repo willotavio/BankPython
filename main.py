@@ -9,16 +9,31 @@ class Main:
             print("MENU"
                   "\nL.List Accounts"
                   "\nC.Create Account"
+                  "\nA.Access Account"
                   "\nE.Exit")
             op = str(input().upper())
             if op == "L":
-                self.logger.out(nubank.getAccounts())
+                if not nubank.getAccounts():
+                    self.logger.out("There's no account")
+                else:
+                    self.logger.out(nubank.getAccounts())
             elif op == "C":
                 accountName = str(input("Enter your account name: "))
                 account = nubank.generateAccount(accountName)
                 self.operateAccount(account)
+            elif op == "A":
+                self.logger.out(nubank.getAccounts())
+                selectedId = input("Enter account ID: ")
+                cc = nubank.accessAccount(selectedId)
+                if not cc:
+                    self.logger.out("There's no account with this ID")
+                else:
+                    self.operateAccount(cc)
             elif op == "E":
                 break
+            else:
+                self.logger.out("Invalid option!\n"
+                                "Try again")
 
     def operateAccount(self, account):
         print("Welcome " + account.accountName)

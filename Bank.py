@@ -21,10 +21,16 @@ class Bank:
 
     def getAccounts(self):
         if len(self.accounts) == 0:
-            self.logger.out("There's no account")
+            return False
         else:
             accountList = []
             for i in self.accounts:
                 accountList.append(str(i.accountAgency) + "/" + str(i.accountId) + "/" + str(i.accountName) + "/" + str(i.accountBalance))
-
             return accountList
+
+    def accessAccount(self, selectedId):
+        try:
+            cc = self.accounts[int(selectedId) - 1]
+            return cc
+        except:
+            self.logger.out("ERROR")
