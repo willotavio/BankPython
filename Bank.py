@@ -1,4 +1,3 @@
-from Log import *
 from Account import *
 class Bank:
     logger = Log()

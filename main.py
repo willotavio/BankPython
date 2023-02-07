@@ -1,4 +1,3 @@
-from Log import *
 from Bank import *
 from Account import *
 class Main:
@@ -19,16 +18,22 @@ class Main:
                     self.logger.out(nubank.getAccounts())
             elif op == "C":
                 accountName = str(input("Enter your account name: "))
-                accountPassword = str(input("Enter your account password: "))
-                account = nubank.generateAccount(accountName, accountPassword)
-                self.operateAccount(account)
+                while True:
+                    accountPassword = str(input("Enter your account password: "))
+                    if len(accountPassword) < Account.MIN_LENGTH:
+                        self.logger.out("Your password must have at least 8 chars")
+                    else:
+                        account = nubank.generateAccount(accountName, accountPassword)
+                        self.operateAccount(account)
+                        break
             elif op == "A":
                 self.logger.out(nubank.getAccounts())
                 selectedName = input("Enter your account name: ")
                 selectedPassword = input("Enter your account password: ")
                 cc = nubank.accessAccount(selectedName, selectedPassword)
                 if not cc:
-                    self.logger.out("There's no account with this name")
+                    self.logger.out("Invalid credentials!"
+                                    "\nTry again")
                 else:
                     self.operateAccount(cc)
             elif op == "E":
@@ -45,12 +50,12 @@ class Main:
                   "\nW.Withdraw"
                   "\nB.View Balance"
                   "\nE.Exit")
-            choice = str(input().upper())
-            if choice == "D":
+            op = str(input().upper())
+            if op == "D":
                 print("DEPOSIT"
                       "\nEnter the value you want to deposit in your account:")
                 account.deposit(float(input()))
-            elif choice == "W":
+            elif op == "W":
                 print("WITHDRAW"
                       "\nEnter the value you want to withdraw from your account:")
                 if not account.withDraw(float(input())):
@@ -60,9 +65,12 @@ class Main:
                     self.logger.out("Withdraw successful"
                                "\nCurrent balance: R$" + str(account.accountBalance))
 
-            elif choice == "B":
+            elif op == "B":
                 account.getBalance()
-            elif choice == "E":
+            elif op == "E":
                 break
+            else:
+                self.logger.out("Invalid option!\n"
+                                "Try again")
 
 main = Main()
