@@ -19,23 +19,20 @@ class Main:
                     self.logger.out(nubank.getAccounts())
             elif op == "C":
                 accountName = str(input("Enter your account name: "))
-                account = nubank.generateAccount(accountName)
+                accountPassword = str(input("Enter your account password: "))
+                account = nubank.generateAccount(accountName, accountPassword)
                 self.operateAccount(account)
             elif op == "A":
                 self.logger.out(nubank.getAccounts())
-                selectedName = input("Enter account name: ")
-                cc = nubank.accessAccount(selectedName)
+                selectedName = input("Enter your account name: ")
+                selectedPassword = input("Enter your account password: ")
+                cc = nubank.accessAccount(selectedName, selectedPassword)
                 if not cc:
                     self.logger.out("There's no account with this name")
                 else:
                     self.operateAccount(cc)
             elif op == "E":
                 break
-            elif op == "SEGREDO GIGATONICO":
-                if getattr(nubank.accounts[0], "accountName") == "zeppeli":
-                    print("jooj")
-                else:
-                    print("aksnd")
             else:
                 self.logger.out("Invalid option!\n"
                                 "Try again")

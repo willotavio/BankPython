@@ -9,9 +9,8 @@ class Bank:
     def __init__(self, bankAgency):
         self.bankAgency = bankAgency
 
-    def generateAccount(self, accountName):
-        print(self.lastAccount)
-        account = Account(str(self.bankAgency), str(self.lastAccount), accountName, 0)
+    def generateAccount(self, accountName, accountPassword):
+        account = Account(str(self.bankAgency), str(self.lastAccount), accountName, accountPassword, 0)
         self.lastAccount = self.lastAccount + 1
         self.insertAccount(account)
         return account
@@ -28,10 +27,10 @@ class Bank:
                 accountList.append(str(i.accountAgency) + "/" + str(i.accountId) + "/" + str(i.accountName) + "/" + str(i.accountBalance))
             return accountList
 
-    def accessAccount(self, selectedName):
+    def accessAccount(self, selectedName, selectedPassword):
         try:
             for i in range(len(self.accounts)):
-                if getattr(self.accounts[int(i)], "accountName") == selectedName:
+                if getattr(self.accounts[int(i)], "accountName") == selectedName and getattr(self.accounts[int(i)], "accountPassword") == selectedPassword :
                     cc = self.accounts[int(i)]
                     return cc
         except:

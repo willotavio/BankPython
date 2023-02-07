@@ -4,13 +4,14 @@ class Account:
     logger = Log()
 
     MAX_LENGTH = 12
+    MIN_LENGTH = 8
 
-    def __init__(self, accountAgency, accountId, accountName, accountBalance):
+    def __init__(self, accountAgency, accountId, accountName, accountPassword, accountBalance):
         self.accountAgency = accountAgency
         self.accountId = accountId
         self.setName(accountName)
+        self.setPassword(accountPassword)
         self.accountBalance = accountBalance
-
         self.logger.out("Account created!"
               "\nAgency: " + str(accountAgency) +
               "\nID: " + str(accountId) +
@@ -24,6 +25,8 @@ class Account:
             self.accountName = accountName
         self.logger.out(self.accountName)
 
+    def setPassword(self, accountPassword):
+        self.accountPassword = accountPassword
     def deposit(self, value):
         self.accountBalance = self.accountBalance + value
         self.logger.out("DEPOSIT - R$" + str(value) + " Current balance: R$" + str(self.accountBalance))
